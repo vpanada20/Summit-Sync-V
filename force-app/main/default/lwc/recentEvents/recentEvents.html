@@ -1,28 +1,18 @@
 <template>
     <div class="slds-p-around_large component-container">
-        <!-- Title -->
         <h2 class="slds-text-heading_large slds-text-align_center slds-m-bottom_large title">New Events</h2>
-
-        <!-- Loading Spinner -->
         <template if:true={isLoading}>
-            <div class="spinner-container">
-                <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
-            </div>
+            <div class="spinner-container"><lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner></div>
         </template>
-
-        <!-- Event Grid -->
         <template if:false={isLoading}>
             <div class="slds-grid slds-wrap slds-gutters">
-                <!-- Event Card Loop -->
                 <template for:each={recentEvents} for:item="event">
                     <div key={event.eventId} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-bottom_medium">
                         <div class="event-card">
                             <img src={event.imageUrl} alt={event.eventName} class="event-image"/>
                             <div class="event-details">
                                 <h3 class="slds-text-heading_small slds-m-bottom_x-small event-name">{event.eventName}</h3>
-                                <p class="slds-text-body_small slds-text-color_weak">
-                                    <lightning-formatted-date-time value={event.eventStartDate} month="short" day="2-digit" year="numeric"></lightning-formatted-date-time>
-                                </p>
+                                <p class="slds-text-body_small slds-text-color_weak"><lightning-formatted-date-time value={event.eventStartDate} month="short" day="2-digit" year="numeric"></lightning-formatted-date-time></p>
                                 <lightning-button label="View More" variant="neutral" onclick={handleViewMore} data-id={event.eventId} class="slds-m-top_small"></lightning-button>
                             </div>
                         </div>
@@ -37,10 +27,7 @@
         <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
             <div class="slds-modal__container">
                 <header class="slds-modal__header">
-                    <button class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={closeModal}>
-                        <lightning-icon icon-name="utility:close" size="medium"></lightning-icon>
-                        <span class="slds-assistive-text">Close</span>
-                    </button>
+                    <button class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={closeModal}><lightning-icon icon-name="utility:close" size="medium"></lightning-icon></button>
                     <h2 class="slds-text-heading_medium">{selectedEvent.eventName}</h2>
                 </header>
                 <div class="slds-modal__content slds-p-around_medium">
@@ -51,8 +38,15 @@
                     <p><strong>Venue:</strong> {selectedEvent.venueName}</p>
                 </div>
                 <footer class="slds-modal__footer">
-                    <lightning-button label="Close" onclick={closeModal}></lightning-button>
-                    <lightning-button variant="brand" label="Book Now" class="slds-m-left_x-small"></lightning-button>
+                    <template if:true={isGuestUser}>
+                        <div class="slds-text-align_center slds-text-color_weak">
+                            <a href="/SummitSync/login">Log in</a> or <a href="/SummitSync/SelfRegister">create an account</a> to book this event.
+                        </div>
+                    </template>
+                    <template if:false={isGuestUser}>
+                        <lightning-button label="Close" onclick={closeModal}></lightning-button>
+                        <lightning-button variant="brand" label="Book Now" class="slds-m-left_x-small"></lightning-button>
+                    </template>
                 </footer>
             </div>
         </section>

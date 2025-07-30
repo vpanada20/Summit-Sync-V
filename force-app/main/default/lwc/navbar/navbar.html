@@ -2,24 +2,24 @@
     <header class="navbar-container slds-p-horizontal_large">
         <!-- Logo -->
         <div class="logo">
-            <a href="/SummitSync/">Summit Sync</a>
+            <a href="/SummitSync/">
+                <img src={logoUrl} alt="Summit Sync Logo" class="logo-image"/>
+            </a>
         </div>
 
         <!-- Search Bar -->
         <div class="search-container slds-m-horizontal_large">
             <div class="search-bar">
                 <lightning-icon icon-name="utility:search" size="x-small" class="search-icon"></lightning-icon>
-                <!-- Added onchange handler -->
                 <input type="text" class="search-input" placeholder="Search events" onchange={handleNameSearchChange}>
                 <div class="location-divider"></div>
                 <lightning-icon icon-name="utility:location" size="x-small" class="location-icon"></lightning-icon>
-                <!-- Added onchange handler -->
                 <input type="text" class="location-input" placeholder="Region" onchange={handleRegionSearchChange}>
             </div>
-            <!-- Replaced button with a link (a tag) -->
-            <a class="search-button" href={searchUrl}>
+            <!-- This button now triggers our validation and redirect logic -->
+            <button class="search-button" onclick={handleSearch}>
                 <lightning-icon icon-name="utility:search" size="x-small" alternative-text="Search"></lightning-icon>
-            </a>
+            </button>
         </div>
         
         <!-- Desktop Navigation Links -->
@@ -29,7 +29,7 @@
                 <!-- Guest View -->
                 <template if:true={isGuestUser}>
                     <li class="slds-p-horizontal_medium"><a href="/SummitSync/login">Log In</a></li>
-                    <li class="slds-p-horizontal_medium"><a href="/SummitSync/SelfRegister">Sign Up</a></li>
+                    <li class="slds-p-horizontal_medium"><a href="/SummitSync/register">Sign Up</a></li>
                 </template>
                 <!-- Member View -->
                 <template if:true={isMember}>
@@ -60,6 +60,15 @@
             </button>
         </div>
     </header>
+
+    <!-- Display search error if it exists -->
+    <template if:true={searchError}>
+        <div class="slds-notify slds-notify_alert slds-theme_error slds-m-horizontal_large" role="alert">
+            <span class="slds-assistive-text">Error</span>
+            <lightning-icon icon-name="utility:warning" alternative-text="Warning!" variant="inverse" size="x-small"></lightning-icon>
+            <h2 class="slds-m-left_x-small">{searchError}</h2>
+        </div>
+    </template>
 
     <!-- Mobile Navigation -->
     <template if:true={isMobileMenuOpen}>

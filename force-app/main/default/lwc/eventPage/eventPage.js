@@ -1,5 +1,6 @@
 import { LightningElement, track, wire } from 'lwc';
 import { CurrentPageReference } from 'lightning/navigation';
+import isGuest from '@salesforce/user/isGuest';
 import getEvents from '@salesforce/apex/EventController.getEvents';
 import getRegionPicklistValues from '@salesforce/apex/EventController.getRegionPicklistValues';
 import getEventTypePicklistValues from '@salesforce/apex/EventController.getEventTypePicklistValues';
@@ -14,18 +15,16 @@ export default class EventPage extends LightningElement {
     @track isModalOpen = false;
     @track selectedEvent = {};
 
-    // Filter values
     @track regionFilter = '';
     @track eventTypeFilter = '';
-
     @track startDateFilter = null;
-    @track nameFilter = ''; // New filter for event name
+    @track nameFilter = '';
 
-    // Wire the page reference to read URL parameters
+    isGuestUser = isGuest;
+
     @wire(CurrentPageReference)
     getStateParameters(currentPageReference) {
         if (currentPageReference) {
-            // Read the search terms from the URL and apply them to the filters
             this.nameFilter = currentPageReference.state?.name || '';
             this.regionFilter = currentPageReference.state?.region || this.regionFilter;
             this.eventTypeFilter = currentPageReference.state?.type || this.eventTypeFilter;
@@ -42,7 +41,6 @@ export default class EventPage extends LightningElement {
         if (data) { this.eventTypeOptions = [{ label: 'All Types', value: '' }, ...data]; }
     }
 
-    // Main wire service now includes the nameFilter
     @wire(getEvents, { 
         regionFilter: '$regionFilter', 
         eventTypeFilter: '$eventTypeFilter', 
@@ -59,12 +57,10 @@ export default class EventPage extends LightningElement {
         }
     }
 
-    // --- Filter Handlers ---
     handleRegionChange(event) { this.isLoading = true; this.regionFilter = event.detail.value; }
     handleEventTypeChange(event) { this.isLoading = true; this.eventTypeFilter = event.detail.value; }
     handleDateChange(event) { this.isLoading = true; this.startDateFilter = event.target.value; }
 
-    // --- Modal Handlers ---
     handleViewMore(event) {
         const eventId = event.target.dataset.id;
         this.selectedEvent = this.events.find(e => e.eventId === eventId);
