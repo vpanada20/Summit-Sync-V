@@ -16,19 +16,19 @@ export default class EventPage extends LightningElement {
 
     // Filter values
     @track regionFilter = '';
-    @track eventTypeFilter = ''; // This will now be set by the URL parameter
+    @track eventTypeFilter = '';
+
     @track startDateFilter = null;
-    @track nameFilter = '';
+    @track nameFilter = ''; // New filter for event name
 
     // Wire the page reference to read URL parameters
     @wire(CurrentPageReference)
     getStateParameters(currentPageReference) {
         if (currentPageReference) {
-            // Read search terms from the navbar
+            // Read the search terms from the URL and apply them to the filters
             this.nameFilter = currentPageReference.state?.name || '';
-            this.regionFilter = currentPageReference.state?.region || '';
-            // Read event type from the carousel
-            this.eventTypeFilter = currentPageReference.state?.type || '';
+            this.regionFilter = currentPageReference.state?.region || this.regionFilter;
+            this.eventTypeFilter = currentPageReference.state?.type || this.eventTypeFilter;
         }
     }
 
@@ -42,7 +42,7 @@ export default class EventPage extends LightningElement {
         if (data) { this.eventTypeOptions = [{ label: 'All Types', value: '' }, ...data]; }
     }
 
-    // Main wire service now includes all filters
+    // Main wire service now includes the nameFilter
     @wire(getEvents, { 
         regionFilter: '$regionFilter', 
         eventTypeFilter: '$eventTypeFilter', 

@@ -1,10 +1,9 @@
 import { LightningElement, track, wire } from 'lwc';
-import { NavigationMixin } from 'lightning/navigation';
 import isGuest from '@salesforce/user/isGuest';
 import userId from '@salesforce/user/Id';
 import getCommunityUserInfo from '@salesforce/apex/CommunityLoginController.getCommunityUserInfo';
 
-export default class Navbar extends NavigationMixin(LightningElement) {
+export default class Navbar extends LightningElement {
     @track isMobileMenuOpen = false;
     @track isProfileMenuOpen = false;
     @track userName = '';
@@ -47,18 +46,11 @@ export default class Navbar extends NavigationMixin(LightningElement) {
         this.regionSearchTerm = event.target.value;
     }
 
-    handleSearch() {
-        // Navigate to the Events page, passing the search terms as URL parameters
-        this[NavigationMixin.Navigate]({
-            type: 'standard__comm__namedPage',
-            attributes: {
-                name: 'Events' // IMPORTANT: Assumes your events page API name is 'Events'
-            },
-            state: {
-                // These become URL parameters like ?name=...&region=...
-                name: this.nameSearchTerm,
-                region: this.regionSearchTerm
-            }
-        });
+    // This getter dynamically builds the search URL
+    get searchUrl() {
+        // Use encodeURIComponent to handle spaces and special characters safely
+        const nameParam = encodeURIComponent(this.nameSearchTerm);
+        const regionParam = encodeURIComponent(this.regionSearchTerm);
+        return `/SummitSync/events?name=${nameParam}&region=${regionParam}`;
     }
 }

@@ -9,14 +9,17 @@
         <div class="search-container slds-m-horizontal_large">
             <div class="search-bar">
                 <lightning-icon icon-name="utility:search" size="x-small" class="search-icon"></lightning-icon>
+                <!-- Added onchange handler -->
                 <input type="text" class="search-input" placeholder="Search events" onchange={handleNameSearchChange}>
                 <div class="location-divider"></div>
                 <lightning-icon icon-name="utility:location" size="x-small" class="location-icon"></lightning-icon>
+                <!-- Added onchange handler -->
                 <input type="text" class="location-input" placeholder="Region" onchange={handleRegionSearchChange}>
             </div>
-            <button class="search-button" onclick={handleSearch}>
+            <!-- Replaced button with a link (a tag) -->
+            <a class="search-button" href={searchUrl}>
                 <lightning-icon icon-name="utility:search" size="x-small" alternative-text="Search"></lightning-icon>
-            </button>
+            </a>
         </div>
         
         <!-- Desktop Navigation Links -->
