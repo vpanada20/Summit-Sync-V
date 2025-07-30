@@ -1,0 +1,77 @@
+<template>
+    <header class="navbar-container slds-p-horizontal_large">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="/SummitSync/">Summit Sync</a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container slds-m-horizontal_large">
+            <div class="search-bar">
+                <lightning-icon icon-name="utility:search" size="x-small" class="search-icon"></lightning-icon>
+                <input type="text" class="search-input" placeholder="Search events" onchange={handleNameSearchChange}>
+                <div class="location-divider"></div>
+                <lightning-icon icon-name="utility:location" size="x-small" class="location-icon"></lightning-icon>
+                <input type="text" class="location-input" placeholder="Region" onchange={handleRegionSearchChange}>
+            </div>
+            <button class="search-button" onclick={handleSearch}>
+                <lightning-icon icon-name="utility:search" size="x-small" alternative-text="Search"></lightning-icon>
+            </button>
+        </div>
+        
+        <!-- Desktop Navigation Links -->
+        <nav class="nav-links">
+            <ul class="slds-list_horizontal slds-grid slds-grid_vertical-align-center">
+                <li class="slds-p-horizontal_medium"><a href="/SummitSync/events">Events</a></li>
+                <!-- Guest View -->
+                <template if:true={isGuestUser}>
+                    <li class="slds-p-horizontal_medium"><a href="/SummitSync/login">Log In</a></li>
+                    <li class="slds-p-horizontal_medium"><a href="/SummitSync/register">Sign Up</a></li>
+                </template>
+                <!-- Member View -->
+                <template if:true={isMember}>
+                    <li class="slds-p-horizontal_medium">
+                        <div class="profile-menu-container">
+                            <button class="profile-button slds-button" onclick={toggleProfileMenu}>
+                                <template if:true={userPhotoUrl}><img src={userPhotoUrl} alt="User Profile" class="profile-avatar"/></template>
+                                <template if:false={userPhotoUrl}><div class="profile-avatar profile-initials" title={userName}>{userInitials}</div></template>
+                                <span class="profile-name slds-m-left_x-small">{userName}</span>
+                                <lightning-icon icon-name="utility:chevrondown" size="x-small" class="slds-m-left_x-small"></lightning-icon>
+                            </button>
+                            <div if:true={isProfileMenuOpen} class="slds-dropdown slds-dropdown_right">
+                                <ul class="slds-dropdown__list" role="menu">
+                                    <li class="slds-dropdown__item" role="presentation"><a href="/SummitSync/my-account" role="menuitem"><span class="slds-truncate">My Profile</span></a></li>
+                                    <li class="slds-dropdown__item" role="presentation"><a href="/SummitSync/logout" role="menuitem"><span class="slds-truncate">Log Out</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </nav>
+
+        <!-- Mobile Menu Toggle -->
+        <div class="mobile-menu-toggle">
+            <button class="slds-button slds-button_icon" onclick={toggleMobileMenu}>
+                <lightning-icon icon-name="utility:rows" size="medium" alternative-text="Menu"></lightning-icon>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <template if:true={isMobileMenuOpen}>
+        <div class="mobile-nav-links">
+            <ul class="slds-list">
+                <li class="slds-p-vertical_small slds-p-horizontal_large"><a href="/SummitSync/events">Events</a></li>
+                <template if:true={isGuestUser}>
+                    <li class="slds-p-vertical_small slds-p-horizontal_large"><a href="/SummitSync/login">Log In</a></li>
+                    <li class="slds-p-vertical_small slds-p-horizontal_large"><a href="/SummitSync/register">Sign Up</a></li>
+                </template>
+                 <template if:true={isMember}>
+                    <li class="slds-p-vertical_small slds-p-horizontal_large"><a href="/SummitSync/my-account">My Profile</a></li>
+                    <li class="slds-p-vertical_small slds-p-horizontal_large"><a href="/SummitSync/logout">Log Out</a></li>
+                </template>
+            </ul>
+        </div>
+    </template>
+</template>

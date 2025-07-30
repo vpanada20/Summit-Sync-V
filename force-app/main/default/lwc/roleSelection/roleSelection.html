@@ -1,0 +1,26 @@
+<template>
+    <div class="signup-container">
+        <div class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header"><h2 class="slds-text-heading_medium">How will you be joining us?</h2></div>
+                <div class="slds-modal__content slds-p-around_medium slds-text-align_center">
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <div class="role-card" onclick={selectRole} data-role="Attendee">
+                                <lightning-icon icon-name="standard:user" size="large"></lightning-icon>
+                                <div class="role-title">Attendee</div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <div class="role-card" onclick={selectRole} data-role="Speaker">
+                                <lightning-icon icon-name="standard:voice_call" size="large"></lightning-icon>
+                                <div class="role-title">Speaker</div>
+                            </div>
+                        </div>
+                    </div>
+                     <template if:true={error}><div class="slds-text-color_error slds-m-top_small">{error}</div></template>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

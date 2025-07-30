@@ -1,0 +1,167 @@
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    height: 60px;
+    padding: 0 1rem;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #E55D4A; /* Summit Sync Brand Color */
+    text-decoration: none;
+}
+
+/* --- Search Bar Styles --- */
+.search-container {
+    display: none; /* Hidden on mobile by default */
+    flex-grow: 1;
+    max-width: 500px;
+    margin: 0 2rem;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    width: 100%;
+}
+
+.search-input, .location-input {
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+.search-input {
+    width: 60%;
+}
+
+.location-input {
+    width: 40%;
+}
+
+.search-icon, .location-icon {
+    margin-right: 0.5rem;
+}
+
+.location-divider {
+    height: 20px;
+    border-left: 1px solid #ccc;
+    margin: 0 0.75rem;
+}
+
+.search-button {
+    background-color: #E55D4A;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    padding: 0.6rem;
+    cursor: pointer;
+    margin-left: -40px;
+}
+
+/* --- Navigation Links and Profile Menu --- */
+.nav-links {
+    display: none; /* Hidden on mobile */
+}
+
+.nav-links a {
+    color: #181818;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.profile-menu-container {
+    position: relative;
+}
+
+.profile-button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.profile-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0070d2; /* Standard Salesforce blue */
+    color: white;
+    font-weight: bold;
+}
+
+.profile-name {
+    font-weight: 500;
+}
+
+.slds-dropdown {
+    margin-top: 8px;
+    display: block;
+    position: absolute;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1001;
+}
+.slds-dropdown a {
+    display: block;
+    padding: 0.75rem 1rem;
+    white-space: nowrap;
+}
+.slds-dropdown a:hover {
+    background-color: #f3f3f3;
+}
+
+/* --- Mobile Menu --- */
+.mobile-menu-toggle {
+    display: block;
+}
+
+.mobile-nav-links {
+    display: block;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.mobile-nav-links a {
+    display: block;
+    color: #181818;
+    text-decoration: none;
+    padding: 1rem;
+    border-top: 1px solid #f3f3f3;
+}
+
+/* --- Responsive Breakpoints --- */
+@media (min-width: 768px) {
+    .nav-links {
+        display: block;
+    }
+    .search-container {
+        display: flex;
+    }
+    .mobile-menu-toggle, .mobile-nav-links {
+        display: none;
+    }
+}

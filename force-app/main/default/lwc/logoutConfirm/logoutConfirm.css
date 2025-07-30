@@ -1,0 +1,36 @@
+.logout-container {
+    min-height: calc(100vh - 60px);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+.slds-modal { 
+    position: relative; 
+    width: 100%; 
+    max-width: 420px; 
+}
+.slds-modal__container { 
+    width: 100%; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2); 
+    background: white; 
+}
+.slds-modal__header { 
+    border-bottom: none; 
+    padding-bottom: 0; 
+}
+.slds-modal__footer { 
+    border-top: none; 
+}
+.slds-modal__footer lightning-button {
+    width: 100%;
+}
+.logout-frame {
+    display: none;
+    width: 0;
+    height: 0;
+    border: none;
+}

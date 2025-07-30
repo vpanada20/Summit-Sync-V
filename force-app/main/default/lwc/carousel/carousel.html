@@ -1,0 +1,64 @@
+<template>
+    <div class="carousel-container slds-box">
+        <!-- Main Carousel -->
+        <div class="carousel">
+            <!-- Slide 1: Workshop -->
+            <div class="slide workshop-slide">
+                <div class="slds-grid slds-grid_vertical-align-center slds-grid_horizontal-align-center slds-text-align_center slide-content">
+                    <div class="slds-col">
+                        <div class="slide-top-content">
+                            <div class="fancy-text-container">
+                                <span class="fancy-text-line-1 workshop-text-1">LEARN BY DOING</span>
+                                <span class="fancy-text-line-2 workshop-text-2">SKILL UP &amp; STAND OUT</span>
+                            </div>
+                            <div class="slide-subtitle">Workshops</div>
+                        </div>
+                        <!-- This is now a direct link -->
+                        <a href="/SummitSync/events?type=Workshop" class="slds-button slds-button_destructive book-now-button">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 2: Webinar -->
+            <div class="slide webinar-slide">
+                <div class="slds-grid slds-grid_vertical-align-center slds-grid_horizontal-align-center slds-text-align_center slide-content">
+                    <div class="slds-col">
+                        <div class="slide-top-content">
+                            <div class="fancy-text-container">
+                                <span class="fancy-text-line-1 webinar-text-1">INSIGHTS ON DEMAND</span>
+                                <span class="fancy-text-line-2 webinar-text-2">CONNECT WITH EXPERTS</span>
+                            </div>
+                            <div class="slide-subtitle">Webinars</div>
+                        </div>
+                        <!-- This is now a direct link -->
+                        <a href="/SummitSync/events?type=Webinar" class="slds-button slds-button_destructive book-now-button">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 3: Conference -->
+            <div class="slide conference-slide">
+                <div class="slds-grid slds-grid_vertical-align-center slds-grid_horizontal-align-center slds-text-align_center slide-content">
+                    <div class="slds-col">
+                        <div class="slide-top-content">
+                            <div class="fancy-text-container">
+                                <span class="fancy-text-line-1 conference-text-1">SHAPE TOMORROW</span>
+                                <span class="fancy-text-line-2 conference-text-2">AT THE PREMIER EVENT</span>
+                            </div>
+                            <div class="slide-subtitle">Conferences</div>
+                        </div>
+                        <!-- This is now a direct link -->
+                        <a href="/SummitSync/events?type=Conference" class="slds-button slds-button_destructive book-now-button">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navigation Buttons -->
+        <button class="nav-button prev" onclick={goToPrev}>&#10094;</button>
+        <button class="nav-button next" onclick={goToNext}>&#10095;</button>
+        <!-- Dot Indicators -->
+        <div class="dots">
+            <template for:each={slides} for:item="slide">
+                <span key={slide.index} class={slide.dotClass} data-index={slide.index} onclick={goToSlide}></span>
+            </template>
+        </div>
+    </div>
+</template>

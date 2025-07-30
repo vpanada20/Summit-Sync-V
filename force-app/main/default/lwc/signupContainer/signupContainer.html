@@ -1,0 +1,30 @@
+<template>
+    <!-- Step 1: Show Email Verification -->
+    <template if:true={showEmailVerification}>
+        <c-email-verification onverified={handleVerificationSuccess}></c-email-verification>
+    </template>
+    <!-- Step 2: Show Role Selection -->
+    <template if:true={showRoleSelection}>
+        <c-role-selection 
+            email={email} 
+            first-name={firstName}
+            last-name={lastName}
+            password={password}
+            attendee-record-type-id={attendeeRtId}
+            speaker-record-type-id={speakerRtId}
+            oncomplete={handleSignupComplete}>
+        </c-role-selection>
+    </template>
+    <!-- Step 3: Show Final Success Message -->
+    <template if:true={showSuccessMessage}>
+         <div class="signup-container">
+            <div class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container slds-text-align_center slds-p-around_large">
+                    <lightning-icon icon-name="action:approval" size="large" variant="success"></lightning-icon>
+                    <h2 class="slds-text-heading_medium slds-m-top_medium">All Set!</h2>
+                    <p class="slds-m-top_small">Your account has been created successfully.</p>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

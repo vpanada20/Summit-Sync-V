@@ -1,0 +1,42 @@
+.signup-container { 
+    min-height: calc(100vh - 60px);
+    background-size: cover; 
+    background-position: center; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    padding: 2rem;
+}
+.slds-modal { 
+    position: relative; 
+    width: 100%; 
+    max-width: 480px; 
+}
+.slds-modal__container { 
+    background: white; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2); 
+}
+.slds-modal__header { 
+    text-align: center; 
+    border-bottom: none; 
+    padding-bottom: 0; 
+}
+.role-card { 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    padding: 1.5rem 1rem; 
+    cursor: pointer; 
+    transition: all 0.2s; 
+    height: 100%; 
+}
+.role-card:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
+    border-color: #0070d2; 
+}
+.role-title { 
+    font-size: 1.2rem; 
+    font-weight: bold; 
+    margin-top: 0.5rem; 
+}

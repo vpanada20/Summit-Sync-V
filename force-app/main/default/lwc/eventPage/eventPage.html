@@ -1,0 +1,102 @@
+<template>
+    <div class="slds-grid slds-wrap slds-p-around_medium page-container">
+        <!-- Filters Column -->
+        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-4 slds-p-right_large filter-panel">
+            <div class="slds-box filter-box">
+                <h2 class="slds-text-heading_medium slds-m-bottom_medium">Filters</h2>
+
+                <!-- Region Filter -->
+                <lightning-combobox
+                    label="Region"
+                    value={regionFilter}
+                    placeholder="- All Regions -"
+                    options={regionOptions}
+                    onchange={handleRegionChange}
+                    class="slds-m-bottom_medium">
+                </lightning-combobox>
+
+                <!-- Event Type Filter -->
+                <lightning-combobox
+                    label="Event Type"
+                    value={eventTypeFilter}
+                    placeholder="- All Types -"
+                    options={eventTypeOptions}
+                    onchange={handleEventTypeChange}
+                    class="slds-m-bottom_medium">
+                </lightning-combobox>
+
+                <!-- Start Date Filter -->
+                <lightning-input
+                    label="Show events on or after"
+                    type="date"
+                    value={startDateFilter}
+                    onchange={handleDateChange}>
+                </lightning-input>
+            </div>
+        </div>
+
+        <!-- Events Column -->
+        <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-4">
+            <template if:true={isLoading}>
+                <div class="slds-is-relative spinner-container">
+                    <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+                </div>
+            </template>
+            
+            <template if:false={isLoading}>
+                <template if:true={events}>
+                    <div class="slds-grid slds-wrap">
+                        <!-- Event Card Loop -->
+                        <template for:each={events} for:item="event">
+                            <div key={event.eventId} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3 slds-p-around_small">
+                                <div class="event-card">
+                                    <img src={event.imageUrl} alt={event.eventName} class="event-image"/>
+                                    <div class="event-details">
+                                        <h3 class="slds-text-heading_small slds-m-bottom_x-small event-name">{event.eventName}</h3>
+                                        <p class="slds-text-body_small slds-text-color_weak">
+                                            <lightning-formatted-date-time value={event.eventStartDate} month="short" day="2-digit" year="numeric"></lightning-formatted-date-time>
+                                        </p>
+                                        <lightning-button label="View More" variant="neutral" onclick={handleViewMore} data-id={event.eventId} class="slds-m-top_small"></lightning-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <!-- No Events Message -->
+                <template if:false={events}>
+                    <div class="slds-box slds-text-align_center slds-p-around_large">
+                        <p>No events found matching your criteria.</p>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" size="medium"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium">{selectedEvent.eventName}</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <p><strong>Starts:</strong> <lightning-formatted-date-time value={selectedEvent.eventStartDate} year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
+                    <p><strong>Ends:</strong> <lightning-formatted-date-time value={selectedEvent.eventEndDate} year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
+                    <p><strong>Event Type:</strong> {selectedEvent.eventType}</p>
+                    <p><strong>Region:</strong> {selectedEvent.region}</p>
+                    <p><strong>Venue:</strong> {selectedEvent.venueName}</p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Close" onclick={closeModal}></lightning-button>
+                    <lightning-button variant="brand" label="Book Now" class="slds-m-left_x-small"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template> 

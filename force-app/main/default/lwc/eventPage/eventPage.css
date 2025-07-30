@@ -1,0 +1,48 @@
+.page-container {
+    background-color: #f3f4f6; /* Light gray background for the page */
+}
+
+.filter-box {
+    position: sticky;
+    top: 1rem; /* Makes the filter box stick to the top on scroll */
+}
+
+.event-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.event-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.event-details {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows the button to be pushed to the bottom */
+}
+
+.event-name {
+    font-weight: 600;
+    flex-grow: 1; /* Pushes button down */
+}
+
+.spinner-container {
+    height: 200px;
+}
