@@ -1,0 +1,73 @@
+.footer-container {
+    background-color: #1a1a1a; /* Dark background */
+    color: #a8a8a8; /* Light gray text */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #E55D4A; /* Summit Sync Brand Color */
+}
+
+.footer-heading {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff; /* White headings */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+}
+
+.footer-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-container ul li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-container a {
+    color: #a8a8a8;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.footer-container a:hover {
+    color: #ffffff; /* White on hover */
+}
+
+.social-icons a {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+    text-align: center;
+    line-height: 40px; /* Vertically center the icon */
+    transition: background-color 0.2s;
+}
+
+.social-icons a:hover {
+    background-color: #E55D4A;
+}
+
+/* SLDS override to make the social icons white */
+.social-icons lightning-icon {
+    --sds-c-icon-color-default: white;
+    padding-top: 8px; /* Manual adjustment for icon alignment */
+}
+
+.footer-bottom-bar {
+    background-color: #000;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.875rem;
+}
