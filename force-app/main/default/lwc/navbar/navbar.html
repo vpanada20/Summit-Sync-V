@@ -26,10 +26,13 @@
         <nav class="nav-links">
             <ul class="slds-list_horizontal slds-grid slds-grid_vertical-align-center">
                 <li class="slds-p-horizontal_medium"><a href="/SummitSync/events">Events</a></li>
+                <li class="slds-p-horizontal_medium"><a href="/SummitSync/aboutus">About Us</a></li>
                 <!-- Guest View -->
                 <template if:true={isGuestUser}>
                     <li class="slds-p-horizontal_medium"><a href="/SummitSync/login">Log In</a></li>
-                    <li class="slds-p-horizontal_medium"><a href="/SummitSync/register">Sign Up</a></li>
+                    <li class="slds-p-horizontal_medium"><a href="/SummitSync/SelfRegister">Sign Up</a></li>
+                    <li class="slds-p-horizontal_medium"><a href="/SummitSync/feeback">Feeback</a></li>
+            
                 </template>
                 <!-- Member View -->
                 <template if:true={isMember}>
