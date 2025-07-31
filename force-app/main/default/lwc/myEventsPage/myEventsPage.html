@@ -1,0 +1,67 @@
+<template>
+    <div class="slds-p-around_large page-container">
+        <h1 class="slds-text-heading_large slds-text-align_center slds-m-bottom_large title">My Registered Events</h1>
+
+        <template if:true={isLoading}>
+            <div class="spinner-container"><lightning-spinner size="medium"></lightning-spinner></div>
+        </template>
+        
+        <template if:false={isLoading}>
+            <template if:true={registeredEvents}>
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <!-- Event Card Loop -->
+                    <template for:each={registeredEvents} for:item="event">
+                        <div key={event.registrationId} class="slds-col slds-size_1-of-1 slds-large-size_1-of-3 slds-p-bottom_medium">
+                            <div class="event-card">
+                                <div class="image-container">
+                                    <img src={event.imageUrl} alt={event.eventName} class="event-image"/>
+                                    <div class="event-type-badge">{event.status}</div>
+                                </div>
+                                <div class="event-details">
+                                    <p class="slds-text-body_small slds-text-color_weak event-date">
+                                        <lightning-formatted-date-time value={event.eventStartDate} month="short" day="2-digit" year="numeric"></lightning-formatted-date-time>
+                                    </p>
+                                    <h3 class="slds-text-heading_small event-name">{event.eventName}</h3>
+                                    <p class="slds-text-body_small event-location">{event.region}</p>
+                                    <button class="view-more-button" onclick={handleViewDetails} data-id={event.registrationId}>View Registration</button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template if:false={registeredEvents}>
+                <div class="slds-box slds-text-align_center slds-p-around_large">
+                    <p>You have not registered for any events yet.</p>
+                </div>
+            </template>
+        </template>
+    </div>
+
+    <!-- Detail & Cancellation Modal -->
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container fancy-modal">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={closeModal}><lightning-icon icon-name="utility:close" size="medium"></lightning-icon></button>
+                    <h2 class="slds-text-heading_medium">Registration Details</h2>
+                </header>
+                
+                <div class="slds-modal__content slds-p-around_large">
+                    <h3 class="slds-text-heading_small slds-m-bottom_medium">{selectedEvent.eventName}</h3>
+                    <p><strong>Status:</strong> {selectedEvent.status}</p>
+                    <p><strong>Seats Reserved:</strong> {selectedEvent.seats}</p>
+                    <hr/>
+                    <p><strong>Starts:</strong> <lightning-formatted-date-time value={selectedEvent.eventStartDate} weekday="long" year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
+                    <p><strong>Ends:</strong> <lightning-formatted-date-time value={selectedEvent.eventEndDate} weekday="long" year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
+                    <p><strong>Region:</strong> {selectedEvent.region}</p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="close-button" onclick={closeModal}>Close</button>
+                    <button class="cancel-button" onclick={handleCancelBooking} disabled={isCanceling}>Cancel Booking</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
