@@ -1,0 +1,24 @@
+<template>
+    <div class="showcase-container slds-p-around_large">
+        <h2 class="slds-text-heading_large slds-text-align_center">Your Feedback in Action</h2>
+        <p class="slds-text-body_regular slds-text-align_center slds-m-bottom_x-large">
+            We're always listening. Here are some improvements we've made thanks to suggestions from guests like you.
+        </p>
+
+        <lightning-layout multiple-rows="true" pull-to-boundary="small">
+            <template for:each={improvements} for:item="item">
+                <lightning-layout-item key={item.id} size="12" medium-size="4" padding="around-small">
+                    
+                    <div class="improvement-card">
+                        <div class="icon-container">
+                            <lightning-icon icon-name={item.icon} size="medium"></lightning-icon>
+                        </div>
+                        <h3 class="slds-text-heading_small">{item.title}</h3>
+                        <p class="slds-m-top_small">{item.description}</p>
+                    </div>
+
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+    </div>
+</template>
