@@ -1,0 +1,29 @@
+.banner-container {
+    width: 100%;
+    background-color: #f3f3f3; /* Light grey background */
+}
+
+/* Caption text is now constrained in width to look good as a paragraph */
+.caption-text {
+    font-size: 1.15rem; /* Approximately 15pt */
+    line-height: 1.7;
+    max-width: 800px; /* Prevents the line from being too wide */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem; /* Adds some space on smaller screens */
+}
+
+/* Styles the new decorative divider */
+.decorative-divider {
+    width: 80px;
+    height: 2px;
+    background-color: #d8dde6; /* A neutral SLDS grey */
+    margin: 2rem auto; /* Adds space above/below and centers it */
+}
+
+.banner-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

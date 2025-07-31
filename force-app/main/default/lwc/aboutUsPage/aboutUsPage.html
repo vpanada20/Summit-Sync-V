@@ -1,55 +1,64 @@
 <template>
-    <div class="about-us-container">
-        <!-- Hero Section -->
-        <section class="hero-section slds-p-vertical_xx-large slds-p-horizontal_medium">
-            <h1 class="slds-text-heading_large">About Summit Sync</h1>
-            <p class="slds-text-body_regular slds-m-top_medium hero-subtitle">Connecting minds, creating futures. We are dedicated to building the world's most dynamic platform for professional growth and networking.</p>
-        </section>
+    <div class="slds-box slds-theme_default slds-p-around_large slds-text-align_center">
+        <h1 class="slds-text-heading_large slds-m-bottom_medium about-heading">About.</h1>
+        <p>We are one of the leading Event Management & Wedding Planning companies in the city. We have created a niche for ourselves with our work across homes, work & life. We organize awesome events & bespoke celebrations & weave in the memory that you treasure!</p>
+    </div>
 
-        <!-- Our Mission Section -->
-        <section class="content-section slds-p-around_large">
-            <h2 class="slds-text-heading_medium mission-title">Our Mission</h2>
-            <p class="slds-text-body_regular mission-text">Our mission is to empower professionals by providing a seamless and engaging platform for discovering, attending, and hosting high-impact events. We believe in the power of connection and knowledge-sharing to drive innovation and career advancement for everyone.</p>
-            
-            <h2 class="slds-text-heading_medium team-title">Meet The Team</h2>
-            <p class="slds-text-body_regular team-subtitle">We are a passionate group of innovators, thinkers, and creators dedicated to revolutionizing the event industry.</p>
+    <div class="image-scroller" lwc:dom="manual">
+    </div>
 
-            <!-- Team Member Cards -->
-            <div class="slds-grid slds-wrap slds-gutters slds-m-top_large">
-                <!-- Team Member 1 -->
-                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3 slds-p-bottom_medium">
-                    <div class="team-member-card">
-                        <img src="https://placehold.co/400x400/E55D4A/FFFFFF?text=JD" alt="Team Member Jane Doe" class="team-member-image">
-                        <div class="team-member-info slds-p-around_medium">
-                            <h3 class="slds-text-heading_small">Jane Doe</h3>
-                            <p class="title">Founder & CEO</p>
-                            <p class="bio">Jane is the visionary behind Summit Sync, driven by a passion for connecting people and ideas.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Team Member 2 -->
-                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3 slds-p-bottom_medium">
-                    <div class="team-member-card">
-                        <img src="https://placehold.co/400x400/1a1a1a/FFFFFF?text=JS" alt="Team Member John Smith" class="team-member-image">
-                        <div class="team-member-info slds-p-around_medium">
-                            <h3 class="slds-text-heading_small">John Smith</h3>
-                            <p class="title">Chief Technology Officer</p>
-                            <p class="bio">John leads our brilliant engineering team, ensuring our platform is robust, secure, and cutting-edge.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Team Member 3 -->
-                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3 slds-p-bottom_medium">
-                    <div class="team-member-card">
-                        <img src="https://placehold.co/400x400/0070d2/FFFFFF?text=EP" alt="Team Member Emily Parker" class="team-member-image">
-                        <div class="team-member-info slds-p-around_medium">
-                            <h3 class="slds-text-heading_small">Emily Parker</h3>
-                            <p class="title">Head of Community</p>
-                            <p class="bio">Emily is dedicated to creating a vibrant and supportive community for all our users.</p>
-                        </div>
-                    </div>
+    <div class="slds-grid slds-wrap slds-gutters slds-p-around_large">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-around_medium">
+            <div class="animated-card">
+                <img src="https://i.imgur.com/example-image-1.jpg" alt="Corporate Event" class="card-image"/>
+                <div class="slds-p-around_medium">
+                    <h2 class="slds-text-heading_medium">Driven By A Good Vision</h2>
+                    <p class="slds-m-top_small">Our vision is to provide unparalleled service in the event management industry...</p>
                 </div>
             </div>
-        </section>
+        </div>
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-around_medium">
+            <div class="animated-card">
+                <img src="https://i.imgur.com/example-image-2.jpg" alt="Wedding Decor" class="card-image"/>
+                <div class="slds-p-around_medium">
+                    <h2 class="slds-text-heading_medium">What We Do?</h2>
+                    <p class="slds-m-top_small">As specialists in creating superb, one-of-a-kind events, we are among the most trusted event planning companies in the country...</p>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="cta-section slds-text-align_center slds-p-vertical_large">
+        <h2 class="slds-text-heading_large cta-text">Looking for a collaboration?</h2>
+        <lightning-button
+            variant="brand"
+            label="Let's Talk"
+            title="Let's Talk"
+            onclick={openModal}
+            class="slds-m-top_medium cta-button">
+        </lightning-button>
+    </div>
+
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium slds-hyphenate">Collaboration Request</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-input label="Full Name" value={contactName} onchange={handleNameChange} required></lightning-input>
+                    <lightning-input type="email" label="Email Address" value={contactEmail} onchange={handleEmailChange} required></lightning-input>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" label="Cancel" onclick={closeModal}></lightning-button>
+                    <lightning-button variant="brand" label="Submit" onclick={handleSubmit} class="slds-m-left_x-small"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
 </template>

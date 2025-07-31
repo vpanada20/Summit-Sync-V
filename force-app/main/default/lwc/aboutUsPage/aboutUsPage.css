@@ -1,53 +1,64 @@
-.about-us-container {
-    font-family: sans-serif;
+/* Custom Heading Font */
+.about-heading {
+    font-weight: 700; /* Bolder heading */
 }
-.hero-section {
-    background-color: #1a1a1a;
-    color: white;
-    text-align: center;
+
+/* Image Scroller Styles */
+.image-scroller {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    padding: 20px 0;
 }
-.hero-subtitle {
-    max-width: 700px;
-    margin: 0 auto;
-    color: #ccc;
+
+.image-scroller::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
 }
-.content-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-}
-.mission-title, .team-title {
-    color: #E55D4A; /* Summit Sync Brand Color */
-}
-.mission-text, .team-subtitle {
-    max-width: 800px;
-    margin: 0 auto 2rem auto;
-    color: #555;
-    line-height: 1.7;
-}
-.team-member-card {
-    background-color: #ffffff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-    height: 100%;
-    text-align: left;
-}
-.team-member-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-.team-member-image {
-    width: 100%;
-    height: 300px;
+
+.scroll-image {
+    height: 250px;
+    width: auto;
+    margin-right: 15px;
+    border-radius: 8px;
     object-fit: cover;
 }
-.team-member-info .title {
-    color: #E55D4A;
-    font-weight: 500;
-    margin: 0.25rem 0 0.5rem 0;
+
+/* Animated Card Styles */
+.animated-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    overflow: hidden; /* Ensures image corners are rounded */
 }
-.team-member-info .bio {
-    color: #666;
+
+.animated-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px; /* Fixed height for consistency */
+    object-fit: cover;
+}
+
+/* Collaboration CTA Section */
+.cta-section {
+    background-color: #DDA0DD; /* A pink/magenta color similar to screenshot */
+}
+
+.cta-text {
+    color: white;
+}
+
+/* Style the brand button to look white on the pink background */
+.cta-button {
+    --slds-c-button-brand-color-background: white;
+    --slds-c-button-brand-color-border: white;
+    --slds-c-button-brand-color-background-hover: #f0f0f0;
+    --slds-c-button-brand-color-border-hover: #f0f0f0;
+    --slds-c-button-text-color: #DDA0DD;
 }

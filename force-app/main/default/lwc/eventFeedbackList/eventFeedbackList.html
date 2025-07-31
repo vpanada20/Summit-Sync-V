@@ -1,0 +1,59 @@
+<template>
+    <div class="feedback-container slds-p-around_large">
+        <!-- Title Section -->
+        <div class="slds-text-align_center slds-m-bottom_large">
+            <h2 class="slds-text-heading_large">Share Your Experience</h2>
+            <p class="slds-text-color_weak slds-m-top_small">Your feedback helps us create better events. Select an event below to get started.</p>
+        </div>
+
+        <!-- Event Cards Section -->
+        <template if:true={pendingEvents.length}>
+            <lightning-layout multiple-rows="true" pull-to-boundary="small">
+                <template for:each={pendingEvents} for:item="event">
+                    <lightning-layout-item key={event.eventId} size="12" large-device-size="4" medium-device-size="6" padding="around-medium">
+                        <div class="event-card">
+                            <h3 class="slds-text-heading_medium">{event.eventName}</h3>
+                            <p class="slds-text-color_weak slds-m-vertical_small">
+                                <lightning-formatted-date-time value={event.eventDate} year="numeric" month="long" day="2-digit"></lightning-formatted-date-time>
+                            </p>
+                            <lightning-button 
+                                variant="brand" 
+                                label="Submit Feedback" 
+                                data-id={event.eventId} 
+                                onclick={handleGiveFeedbackClick}
+                                class="slds-m-top_medium">
+                            </lightning-button>
+                        </div>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </template>
+
+        <!-- Message when there is no pending feedback -->
+        <template if:false={pendingEvents.length}>
+            <div class="slds-text-align_center slds-p-vertical_large empty-state">
+                <lightning-icon icon-name="utility:check" size="large" variant="success"></lightning-icon>
+                <h3 class="slds-text-heading_medium slds-m-top_medium">You're all caught up!</h3>
+                <p>Thank you for sharing your feedback on all of your past events.</p>
+            </div>
+        </template>
+    </div>
+
+    <!-- Modal Popup for the Feedback Form -->
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close"></lightning-icon>
+                    </button>
+                    <h2 class="slds-text-heading_medium">Submit Feedback</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <c-event-feedback-form record-id={selectedEventId} onsuccess={handleFeedbackSuccess}></c-event-feedback-form>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
