@@ -1,0 +1,62 @@
+<template>
+    <div class="booking-container slds-p-around_large">
+        <div class="slds-box booking-form">
+            <!-- Show the booking form -->
+            <template if:false={isSuccess}>
+                <h2 class="slds-text-heading_large slds-text-align_center slds-m-bottom_large">Book Your Spot</h2>
+                
+                <!-- Event Name (Read-only) -->
+                <div class="slds-form-element slds-m-bottom_medium">
+                    <span class="slds-form-element__label">Event</span>
+                    <div class="slds-form-element__control slds-p-top_x-small">
+                        <span class="slds-text-heading_small">{eventName}</span>
+                    </div>
+                </div>
+
+                <!-- Attendee Name (Read-only) -->
+                <div class="slds-form-element slds-m-bottom_medium">
+                    <span class="slds-form-element__label">Attendee</span>
+                    <div class="slds-form-element__control slds-p-top_x-small">
+                        <span class="slds-text-body_regular">{userName}</span>
+                    </div>
+                </div>
+
+                <!-- Number of Seats -->
+                <lightning-input
+                    type="number"
+                    label="Number of Seats"
+                    value={numberOfSeats}
+                    min="1"
+                    step="1"
+                    onchange={handleSeatsChange}
+                    required
+                    class="slds-m-bottom_large">
+                </lightning-input>
+
+                <!-- Error Display -->
+                <template if:true={error}>
+                    <div class="slds-text-color_error slds-m-bottom_medium">{error}</div>
+                </template>
+
+                <!-- Book Now Button -->
+                <lightning-button
+                    variant="brand"
+                    label="Confirm Booking"
+                    onclick={handleBookNow}
+                    disabled={isLoading}
+                    class="slds-size_1-of-1">
+                </lightning-button>
+            </template>
+
+            <!-- Show success message -->
+            <template if:true={isSuccess}>
+                <div class="slds-text-align_center slds-p-vertical_xx-large">
+                    <lightning-icon icon-name="action:approval" size="large" variant="success"></lightning-icon>
+                    <h2 class="slds-text-heading_medium slds-m-top_medium">Booking Confirmed!</h2>
+                    <p class="slds-m-top_small">Your registration has been successfully created.</p>
+                    <lightning-button label="Back to Events" onclick={navigateToEventsPage} class="slds-m-top_large"></lightning-button>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

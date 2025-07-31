@@ -9,11 +9,17 @@
                 <template for:each={recentEvents} for:item="event">
                     <div key={event.eventId} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-bottom_medium">
                         <div class="event-card">
-                            <img src={event.imageUrl} alt={event.eventName} class="event-image"/>
+                            <div class="image-container">
+                                <img src={event.imageUrl} alt={event.eventName} class="event-image"/>
+                                <div class="event-type-badge">{event.eventType}</div>
+                            </div>
                             <div class="event-details">
-                                <h3 class="slds-text-heading_small slds-m-bottom_x-small event-name">{event.eventName}</h3>
-                                <p class="slds-text-body_small slds-text-color_weak"><lightning-formatted-date-time value={event.eventStartDate} month="short" day="2-digit" year="numeric"></lightning-formatted-date-time></p>
-                                <lightning-button label="View More" variant="neutral" onclick={handleViewMore} data-id={event.eventId} class="slds-m-top_small"></lightning-button>
+                                <p class="slds-text-body_small slds-text-color_weak event-date">
+                                    <lightning-formatted-date-time value={event.eventStartDate} month="short" day="2-digit" year="numeric"></lightning-formatted-date-time>
+                                </p>
+                                <h3 class="slds-text-heading_small event-name">{event.eventName}</h3>
+                                <p class="slds-text-body_small event-location">{event.region}</p>
+                                <button class="view-more-button" onclick={handleViewMore} data-id={event.eventId}>View More</button>
                             </div>
                         </div>
                     </div>
@@ -22,32 +28,76 @@
         </template>
     </div>
 
-    <!-- Detail Modal -->
+    <!-- Detail & Booking Modal -->
     <template if:true={isModalOpen}>
         <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
-            <div class="slds-modal__container">
+            <div class="slds-modal__container fancy-modal">
                 <header class="slds-modal__header">
                     <button class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={closeModal}><lightning-icon icon-name="utility:close" size="medium"></lightning-icon></button>
                     <h2 class="slds-text-heading_medium">{selectedEvent.eventName}</h2>
                 </header>
-                <div class="slds-modal__content slds-p-around_medium">
-                    <p><strong>Starts:</strong> <lightning-formatted-date-time value={selectedEvent.eventStartDate} year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
-                    <p><strong>Ends:</strong> <lightning-formatted-date-time value={selectedEvent.eventEndDate} year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
-                    <p><strong>Event Type:</strong> {selectedEvent.eventType}</p>
-                    <p><strong>Region:</strong> {selectedEvent.region}</p>
-                    <p><strong>Venue:</strong> {selectedEvent.venueName}</p>
-                </div>
-                <footer class="slds-modal__footer">
-                    <template if:true={isGuestUser}>
-                        <div class="slds-text-align_center slds-text-color_weak">
-                            <a href="/SummitSync/login">Log in</a> or <a href="/SummitSync/SelfRegister">create an account</a> to book this event.
+                
+                <!-- View 1: Event Details -->
+                <template if:true={showDetailsView}>
+                    <div class="slds-modal__content slds-p-around_large">
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 detail-item">
+                                <lightning-icon icon-name="utility:event" size="small"></lightning-icon>
+                                <div class="detail-text">
+                                    <strong>Starts:</strong>
+                                    <p><lightning-formatted-date-time value={selectedEvent.eventStartDate} weekday="long" year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 detail-item">
+                                <lightning-icon icon-name="utility:date_time" size="small"></lightning-icon>
+                                <div class="detail-text">
+                                    <strong>Ends:</strong>
+                                    <p><lightning-formatted-date-time value={selectedEvent.eventEndDate} weekday="long" year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 detail-item">
+                                <lightning-icon icon-name="utility:location" size="small"></lightning-icon>
+                                <div class="detail-text">
+                                    <strong>Venue & Region:</strong>
+                                    <p>{selectedEvent.venueName}, {selectedEvent.region}</p>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 detail-item">
+                                <lightning-icon icon-name="utility:bookmark" size="small"></lightning-icon>
+                                <div class="detail-text">
+                                    <strong>Event Type:</strong>
+                                    <p>{selectedEvent.eventType}</p>
+                                </div>
+                            </div>
                         </div>
-                    </template>
-                    <template if:false={isGuestUser}>
-                        <lightning-button label="Close" onclick={closeModal}></lightning-button>
-                        <lightning-button variant="brand" label="Book Now" class="slds-m-left_x-small"></lightning-button>
-                    </template>
-                </footer>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="close-button" onclick={closeModal}>Close</button>
+                        <button class="book-now-button" onclick={handleShowBookingForm}>Book Now</button>
+                    </footer>
+                </template>
+
+                <!-- View 2: Booking Form -->
+                <template if:true={showBookingView}>
+                    <div class="slds-modal__content slds-p-around_large">
+                        <template if:false={bookingSuccess}>
+                            <h3 class="slds-text-heading_small booking-title">Confirm Your Booking</h3>
+                            <p class="slds-text-body_small slds-m-bottom_large booking-subtitle">Select the number of seats you'd like to reserve.</p>
+                            <lightning-input type="number" label="Number of Seats" value={numberOfSeats} min="1" step="1" onchange={handleSeatsChange} required class="slds-m-top_medium"></lightning-input>
+                            <template if:true={error}><div class="slds-text-color_error slds-m-top_small">{error}</div></template>
+                        </template>
+                        <template if:true={bookingSuccess}>
+                            <div class="slds-text-align_center">
+                                <lightning-icon icon-name="action:approval" size="large" variant="success"></lightning-icon>
+                                <h2 class="slds-text-heading_medium slds-m-top_medium">Booking Confirmed!</h2>
+                            </div>
+                        </template>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="close-button" onclick={handleShowDetailsView}>Back</button>
+                        <button if:false={bookingSuccess} class="book-now-button" onclick={handleConfirmBooking} disabled={isBookingLoading}>Confirm Booking</button>
+                    </footer>
+                </template>
             </div>
         </section>
         <div class="slds-backdrop slds-backdrop_open"></div>
