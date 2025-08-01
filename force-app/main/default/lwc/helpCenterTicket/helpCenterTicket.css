@@ -1,0 +1,11 @@
+.page-header { background-color: #4A5D7E; color: white; }
+.page-header p { color: #e0e0e0; font-weight: 300; }
+.form-container { background-color: #f9fafb; }
+.ticket-card {
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid #0070d2;
+    border-radius: 4px;
+    max-width: 960px;
+    margin: 0 auto;
+}
