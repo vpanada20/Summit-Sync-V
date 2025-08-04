@@ -45,5 +45,5 @@ Please refer to `CONTRIBUTING.md` for code style guidelines, branching strategie
 
 For questions, reach out to the Summit Sync dev team or open an issue in this repo.
 
-Built with 💙 by Summit Sync Architects
+Built with 💙 by Summit Sync Architects with hardwork and
 https://cognizant-2ee-dev-ed.develop.my.site.com/SummitSync/
