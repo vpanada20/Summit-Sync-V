@@ -1,0 +1,73 @@
+/* --- GLOBAL --- */
+:host { 
+    --brand-color: #0F2D54; 
+    --brand-light-color: #0070d2; 
+    --brand-danger-color: #c23934; /* Red color for hover */
+    --page-bg: #f9fafb;
+}
+.support-page { background-color: var(--page-bg); }
+
+/* --- HEADER - Bolder text and new light blue background --- */
+.page-header { 
+    background-color: #EAF3FB; /* Light blue background */
+    border-bottom: 1px solid #d4e5f5;
+}
+.page-header h1 {
+    color: var(--brand-color);
+    font-weight: 700; /* Bolder text */
+}
+.page-header p { 
+    color: #4A5D7E; 
+    font-weight: 300; 
+}
+
+/* --- SIDEBAR --- */
+.sidebar { background-color: white; border-right: 1px solid #e5e5e5; border-radius: 4px; }
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* This pushes the ticket button to the bottom */
+    height: 100%;
+    padding: 1.5rem;
+}
+.sidebar h2 { border-bottom: 2px solid var(--brand-light-color); padding-bottom: 0.5rem; }
+
+/* Increased spacing between category links */
+.slds-nav-vertical__item {
+    margin-bottom: 0.75rem; 
+}
+
+/* Ticket button hover effect: Blue to Red */
+.ticket-button {
+    /* Overriding SLDS blueprint variables for custom hover */
+    --slds-c-button-brand-color-background: var(--brand-light-color);
+    --slds-c-button-brand-color-border: var(--brand-light-color);
+    --slds-c-button-brand-color-background-hover: var(--brand-danger-color);
+    --slds-c-button-brand-color-border-hover: var(--brand-danger-color);
+}
+
+/* --- ARTICLE LIST --- */
+.article-item { border-bottom: 1px solid #e5e5e5; }
+.article-title { font-size: 1.1rem; color: var(--brand-color); font-weight: 600; text-decoration: none; }
+.article-title:hover { color: var(--brand-light-color); text-decoration: underline; }
+
+/* --- CHAT BOT (No Changes) --- */
+.chat-container { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 1000; }
+.chat-button-wrapper {
+    background: var(--brand-light-color); width: 3.5rem; height: 3.5rem; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25); cursor: pointer;
+    transition: transform 0.2s ease; animation: slide-in 0.5s ease-out;
+}
+.chat-button-wrapper:hover { transform: scale(1.1); }
+@keyframes slide-in { from { transform: translateY(100px); } to { transform: translateY(0); } }
+.chat-window { position: absolute; bottom: calc(100% + 1rem); right: 0; width: 350px; background-color: white; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
+.chat-header { display: flex; justify-content: space-between; align-items: center; background: var(--brand-color); color: white; padding: 0.75rem; border-top-left-radius: 8px; border-top-right-radius: 8px; }
+.bot-icon-wrapper { background-color: rgba(255,255,255,0.2); border-radius: 50%; padding: 0.25rem; }
+.chat-log { height: 400px; padding: 0.75rem; overflow-y: auto; background-color: #f3f4f6; }
+.chat-footer { padding: 0.5rem; border-top: 1px solid #dddbda; display: flex; align-items: center; }
+.slds-chat-message { margin-bottom: 0.75rem; }
+.slds-chat-listitem_inbound .slds-chat-message__text { background-color: #e5e5e5; border-radius: 12px; padding: 8px 12px; }
+.slds-chat-listitem_outbound { text-align: right; }
+.slds-chat-listitem_outbound .slds-chat-message__text { background-color: var(--brand-light-color); color: white; border-radius: 12px; padding: 8px 12px; display: inline-block; text-align: left; }
+.chip-container .chip { display: block; margin-bottom: 0.5rem; }
