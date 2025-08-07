@@ -1,0 +1,82 @@
+<!-- feedbackPage.html -->
+<template>
+    <div class="slds-p-around_large page-container">
+        <h1 class="slds-text-heading_large slds-text-align_center slds-m-bottom_large title">Event Feedback</h1>
+
+        <template if:true={isLoading}>
+            <div class="spinner-container"><lightning-spinner size="medium"></lightning-spinner></div>
+        </template>
+        
+        <template if:false={isLoading}>
+            <template if:true={eventsForFeedback}>
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <!-- Event Card Loop -->
+                    <template for:each={eventsForFeedback} for:item="event">
+                        <div key={event.eventId} class="slds-col slds-size_1-of-1 slds-large-size_1-of-3 slds-p-bottom_medium">
+                            <div class="event-card">
+                                <img src={event.imageUrl} alt={event.eventName} class="event-image"/>
+                                <div class="event-details">
+                                    <h3 class="slds-text-heading_small event-name">{event.eventName}</h3>
+                                    <p class="slds-text-body_small slds-text-color_weak event-date">
+                                        Ended on <lightning-formatted-date-time value={event.eventEndDate} month="short" day="2-digit" year="numeric"></lightning-formatted-date-time>
+                                    </p>
+                                    <button class="view-more-button" onclick={handleProvideFeedback} data-id={event.eventId}>Provide Feedback</button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template if:false={eventsForFeedback}>
+                <div class="slds-box slds-text-align_center slds-p-around_large">
+                    <p>You have no past events to provide feedback for at this time.</p>
+                </div>
+            </template>
+        </template>
+    </div>
+
+    <!-- Feedback Modal -->
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container fancy-modal">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={closeModal}><lightning-icon icon-name="utility:close" size="medium"></lightning-icon></button>
+                    <h2 class="slds-text-heading_medium">Feedback for {selectedEvent.eventName}</h2>
+                </header>
+                
+                <div class="slds-modal__content slds-p-around_large">
+                    <template if:false={isSuccess}>
+                        <lightning-combobox
+                            label="Overall Rating"
+                            value={rating}
+                            placeholder="- Select a Rating -"
+                            options={ratingOptions}
+                            onchange={handleRatingChange}
+                            required
+                            class="slds-m-bottom_medium">
+                        </lightning-combobox>
+                        <lightning-textarea
+                            label="Comments"
+                            value={comments}
+                            onchange={handleCommentsChange}
+                            placeholder="Tell us about your experience...">
+                        </lightning-textarea>
+                        <template if:true={error}><div class="slds-text-color_error slds-m-top_small">{error}</div></template>
+                    </template>
+                    <template if:true={isSuccess}>
+                        <div class="slds-text-align_center">
+                            <lightning-icon icon-name="action:approval" size="large" variant="success"></lightning-icon>
+                            <h2 class="slds-text-heading_medium slds-m-top_medium">Thank You!</h2>
+                            <p class="slds-m-top_small">Your feedback has been submitted.</p>
+                        </div>
+                    </template>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="close-button" onclick={closeModal}>Close</button>
+                    <button if:false={isSuccess} class="book-now-button" onclick={handleSubmitFeedback} disabled={isSubmitting}>Submit Feedback</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
