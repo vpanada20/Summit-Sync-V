@@ -25,17 +25,18 @@
         <nav class="nav-links">
             <ul class="slds-list_horizontal slds-grid slds-grid_vertical-align-center">
                 <li class="slds-p-horizontal_medium"><a href="/SummitSync/events">Events</a></li>
-                <li class="slds-p-horizontal_medium"><a href="/SummitSync/aboutus">About Us</a></li>
+                <li class="slds-p-horizontal_medium"><a href="/SummitSync/about-us">About Us</a></li>
+                <li class="slds-p-horizontal_medium"><a href="/SummitSync/testimonials">Testimonials</a></li>
 
                 <!-- Guest View: Show Log In / Sign Up -->
                 <template if:true={isGuestUser}>
                     <li class="slds-p-horizontal_medium"><a href="/SummitSync/login">Log In</a></li>
-                    <li class="slds-p-horizontal_medium"><a href="/SummitSync/SelfRegister">Sign Up</a></li>
+                    <li class="slds-p-horizontal_medium"><a href="/SummitSync/register">Sign Up</a></li>
                 </template>
 
                 <!-- Member View: Show My Events, Feedback, and Profile Menu -->
                 <template if:true={isMember}>
-                    <li class="slds-p-horizontal_medium"><a href="/SummitSync/myevents">My Events</a></li>
+                    <li class="slds-p-horizontal_medium"><a href="/SummitSync/my-events">My Events</a></li>
                     <li class="slds-p-horizontal_medium"><a href="/SummitSync/feedback">Feedback</a></li>
                     <li class="slds-p-horizontal_medium">
                         <div class="profile-menu-container">
@@ -85,7 +86,7 @@
                     <li class="slds-p-vertical_small slds-p-horizontal_large"><a href="/SummitSync/SelfRegister">Sign Up</a></li>
                 </template>
                  <template if:true={isMember}>
-                    <li class="slds-p-vertical_small slds-p-horizontal_large"><a href="/SummitSync/my-events">My Events</a></li>
+                    <li class="slds-p-vertical_small slds-p-horizontal_large"><a href="/SummitSync/myevents">My Events</a></li>
                     <li class="slds-p-vertical_small slds-p-horizontal_large"><a href="/SummitSync/feedback">Feedback</a></li>
                     <li class="slds-p-vertical_small slds-p-horizontal_large"><a href="/SummitSync/my-account">My Profile</a></li>
                     <li class="slds-p-vertical_small slds-p-horizontal_large"><a href="/SummitSync/logout">Log Out</a></li>
