@@ -1,112 +1,133 @@
+/* --- Main Navbar Container --- */
 .navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    height: 80px; /* Increased height for larger logo */
-    padding: 0 1rem;
+    /* New: Light gradient background */
+    background-image: linear-gradient(to right, #ffffff, #f8f9fa);
+    height: 80px;
+    padding: 0 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); /* Softer shadow */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
+/* --- Logo --- */
 .logo-image {
-    height: 100px; /* Set height as requested */
+    height: 120px;
     width: auto;
     vertical-align: middle;
+    transition: transform 0.2s ease-in-out;
+}
+.logo a:hover .logo-image {
+    transform: scale(1.05);
 }
 
-/* --- Search Bar Styles --- */
+/* --- Search Bar --- */
 .search-container {
-    display: none; /* Hidden on mobile by default */
+    display: none;
     flex-grow: 1;
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 2rem;
+    align-items: center;
 }
-
 .search-bar {
     display: flex;
     align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    padding: 0.5rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 9999px; /* Pill shape */
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
     width: 100%;
+    transition: box-shadow 0.2s;
 }
-
+.search-bar:focus-within {
+    box-shadow: 0 0 0 2px #ff8a75; /* Lighter brand color for focus */
+    border-color: transparent;
+}
 .search-input, .location-input {
     border: none;
     outline: none;
     background: transparent;
+    font-size: 1rem;
 }
-
-.search-input {
-    width: 60%;
-}
-
-.location-input {
-    width: 40%;
-}
-
-.search-icon, .location-icon {
-    margin-right: 0.5rem;
-}
-
-.location-divider {
-    height: 20px;
-    border-left: 1px solid #ccc;
-    margin: 0 0.75rem;
-}
+.search-input { width: 60%; }
+.location-input { width: 40%; }
+.search-icon, .location-icon { margin-right: 0.5rem; --sds-c-icon-color-default: #9ca3af; }
+.location-divider { height: 24px; border-left: 1px solid #e5e7eb; margin: 0 0.75rem; }
 
 .search-button {
-    background-color: #E55D4A;
+    /* New: Lighter gradient for the search button */
+    background-image: linear-gradient(to right, #ff8a75, #ff6b57);
     border: none;
     border-radius: 50%;
     color: white;
-    padding: 0.6rem;
+    width: 44px;
+    height: 44px;
     cursor: pointer;
-    margin-left: -40px;
+    margin-left: -50px; /* Overlap the search bar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.search-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 107, 87, 0.5);
 }
 
-/* --- Navigation Links and Profile Menu --- */
-.nav-links {
-    display: none; /* Hidden on mobile */
-}
-
+/* --- Navigation & Profile Menu --- */
+.nav-links { display: none; }
 .nav-links a {
-    color: #181818;
+    color: #374151;
     text-decoration: none;
     font-weight: 500;
-}
-
-.profile-menu-container {
     position: relative;
+    padding: 0.5rem 0;
+}
+/* Fancy underline effect */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ff8a75; /* Lighter brand color */
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+.nav-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 
+.profile-menu-container { position: relative; }
 .profile-button {
     display: flex;
     align-items: center;
     background: none;
     border: none;
     cursor: pointer;
+    padding: 4px;
+    border-radius: 22px;
+    transition: background-color 0.2s;
 }
-
-.profile-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
+.profile-button:hover { background-color: #f3f4f6; }
+.profile-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
 .profile-initials {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #0070d2; /* Standard Salesforce blue */
+    background-color: #adb5bd; /* Softer, neutral color */
     color: white;
     font-weight: bold;
 }
-
-.profile-name {
-    font-weight: 500;
-}
+.profile-name { font-weight: 600; color: #1f2937; }
 
 .slds-dropdown {
     margin-top: 8px;
@@ -114,55 +135,46 @@
     position: absolute;
     right: 0;
     background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     z-index: 1001;
-    min-width: 150px;
+    min-width: 180px;
+    padding: 0.5rem 0;
 }
 .slds-dropdown a {
     display: block;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 1.25rem;
     white-space: nowrap;
 }
-.slds-dropdown a:hover {
-    background-color: #f3f3f3;
-}
+.slds-dropdown a:hover { background-color: #f3f4f6; }
+.slds-dropdown a::after { display: none; } /* Remove underline from dropdown links */
 
 /* --- Mobile Menu --- */
-.mobile-menu-toggle {
-    display: block;
-}
-
+.mobile-menu-toggle { display: block; }
 .mobile-nav-links {
     display: block;
     position: absolute;
-    top: 80px; /* Adjusted for taller navbar */
+    top: 80px;
     left: 0;
     right: 0;
     background-color: #fff;
     border-bottom: 1px solid #ddd;
-    z-index: 1000;
+    z-index: 999;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-
 .mobile-nav-links a {
     display: block;
     color: #181818;
     text-decoration: none;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     border-top: 1px solid #f3f3f3;
+    font-weight: 500;
 }
 
 /* --- Responsive Breakpoints --- */
 @media (min-width: 768px) {
-    .nav-links {
-        display: block;
-    }
-    .search-container {
-        display: flex;
-    }
-    .mobile-menu-toggle, .mobile-nav-links {
-        display: none;
-    }
+    .nav-links { display: block; }
+    .search-container { display: flex; }
+    .mobile-menu-toggle, .mobile-nav-links { display: none; }
 }

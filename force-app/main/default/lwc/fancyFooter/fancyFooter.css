@@ -1,6 +1,7 @@
 .footer-container {
-    background-color: #1a1a1a; /* Dark background */
-    color: #a8a8a8; /* Light gray text */
+    background-color: #f8f9fa; /* Light gray background to complement the navbar */
+    color: #6b7280; /* Softer text color */
+    border-top: 1px solid #e5e7eb;
 }
 
 .footer-content {
@@ -8,16 +9,20 @@
     margin: 0 auto;
 }
 
-.logo {
-    font-size: 1.75rem;
-    font-weight: bold;
-    color: #E55D4A; /* Summit Sync Brand Color */
+.footer-logo {
+    height: 50px;
+    width: auto;
+    margin-bottom: 1rem;
+}
+
+.footer-column {
+    margin-bottom: 2rem;
 }
 
 .footer-heading {
     font-size: 1rem;
     font-weight: 600;
-    color: #ffffff; /* White headings */
+    color: #1f2937; /* Darker heading text */
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 1rem;
@@ -33,41 +38,43 @@
 }
 
 .footer-container a {
-    color: #a8a8a8;
+    color: #4b5563;
     text-decoration: none;
     transition: color 0.2s ease-in-out;
 }
 
 .footer-container a:hover {
-    color: #ffffff; /* White on hover */
+    color: #E55D4A; /* Summit Sync Brand Color on hover */
 }
 
 .social-icons a {
-    display: inline-block;
-    background-color: #333;
-    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e5e7eb;
+    color: #4b5563;
     border-radius: 50%;
     width: 40px;
     height: 40px;
     margin-right: 0.5rem;
-    text-align: center;
-    line-height: 40px; /* Vertically center the icon */
-    transition: background-color 0.2s;
+    transition: all 0.2s;
 }
 
 .social-icons a:hover {
     background-color: #E55D4A;
+    color: #ffffff;
+    transform: translateY(-2px);
 }
 
-/* SLDS override to make the social icons white */
+/* SLDS override to make the social icons the correct color */
 .social-icons lightning-icon {
-    --sds-c-icon-color-default: white;
-    padding-top: 8px; /* Manual adjustment for icon alignment */
+    --sds-c-icon-color-default: currentColor;
 }
 
 .footer-bottom-bar {
-    background-color: #000;
+    background-color: #e5e7eb;
     text-align: center;
     padding: 1rem;
     font-size: 0.875rem;
+    color: #4b5563;
 }
