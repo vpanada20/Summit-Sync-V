@@ -1,6 +1,5 @@
 <template>
     <div class="slds-grid slds-wrap slds-p-around_medium page-container">
-        <!-- Filters Column -->
         <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-4 slds-p-right_large filter-panel">
             <div class="slds-box filter-box">
                 <h2 class="slds-text-heading_medium slds-m-bottom_medium">Filters</h2>
@@ -10,13 +9,11 @@
             </div>
         </div>
 
-        <!-- Events Column -->
         <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-4">
             <template if:true={isLoading}><div class="slds-is-relative spinner-container"><lightning-spinner size="medium"></lightning-spinner></div></template>
             <template if:false={isLoading}>
                 <template if:true={events}>
                     <div class="slds-grid slds-wrap">
-                        <!-- Event Card Loop -->
                         <template for:each={events} for:item="event">
                             <div key={event.eventId} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3 slds-p-around_small">
                                 <div class="event-card">
@@ -30,6 +27,12 @@
                                         </p>
                                         <h3 class="slds-text-heading_small event-name">{event.eventName}</h3>
                                         <p class="slds-text-body_small event-location">{event.region}</p>
+                                        <template if:true={event.speakerName}>
+                                            <div class="slds-m-top_xx-small slds-grid slds-grid_vertical-align-center event-speaker">
+                                                <lightning-icon icon-name="utility:user" size="x-small" class="slds-m-right_xx-small"></lightning-icon>
+                                                <span class="slds-text-body_small">{event.speakerName}</span>
+                                            </div>
+                                        </template>
                                         <button class="view-more-button" onclick={handleViewMore} data-id={event.eventId}>View More</button>
                                     </div>
                                 </div>
@@ -42,7 +45,6 @@
         </div>
     </div>
 
-    <!-- Detail & Booking Modal -->
     <template if:true={isModalOpen}>
         <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
             <div class="slds-modal__container fancy-modal">
@@ -51,7 +53,6 @@
                     <h2 class="slds-text-heading_medium">{selectedEvent.eventName}</h2>
                 </header>
                 
-                <!-- View 1: Event Details -->
                 <template if:true={showDetailsView}>
                     <div class="slds-modal__content slds-p-around_large">
                         <div class="slds-grid slds-wrap slds-gutters">
@@ -83,6 +84,15 @@
                                     <p>{selectedEvent.eventType}</p>
                                 </div>
                             </div>
+                            <template if:true={selectedEvent.speakerName}>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 detail-item">
+                                    <lightning-icon icon-name="utility:user" size="small"></lightning-icon>
+                                    <div class="detail-text">
+                                        <strong>Speaker:</strong>
+                                        <p>{selectedEvent.speakerName}</p>
+                                    </div>
+                                </div>
+                            </template>
                         </div>
                     </div>
                     <footer class="slds-modal__footer">
@@ -91,7 +101,6 @@
                     </footer>
                 </template>
 
-                <!-- View 2: Booking Form -->
                 <template if:true={showBookingView}>
                     <div class="slds-modal__content slds-p-around_large">
                         <template if:false={bookingSuccess}>

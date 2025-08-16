@@ -9,9 +9,8 @@
         <template if:false={isLoading}>
             <template if:true={registeredEvents}>
                 <div class="slds-grid slds-wrap slds-gutters">
-                    <!-- Event Card Loop -->
                     <template for:each={registeredEvents} for:item="event">
-                        <div key={event.registrationId} class="slds-col slds-size_1-of-1 slds-large-size_1-of-3 slds-p-bottom_medium">
+                        <div key={event.registrationId} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-bottom_medium">
                             <div class="event-card">
                                 <div class="image-container">
                                     <img src={event.imageUrl} alt={event.eventName} class="event-image"/>
@@ -22,7 +21,14 @@
                                         <lightning-formatted-date-time value={event.eventStartDate} month="short" day="2-digit" year="numeric"></lightning-formatted-date-time>
                                     </p>
                                     <h3 class="slds-text-heading_small event-name">{event.eventName}</h3>
-                                    <p class="slds-text-body_small event-location">{event.region}</p>
+                                    <p class="slds-text-body_small event-location">
+                                        <lightning-icon icon-name="utility:location" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                        {event.venueName}, {event.region}
+                                    </p>
+                                    <p class="slds-text-body_small event-speaker">
+                                        <lightning-icon icon-name="utility:user" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                        {event.speakerName}
+                                    </p>
                                     <button class="view-more-button" onclick={handleViewDetails} data-id={event.registrationId}>View Registration</button>
                                 </div>
                             </div>
@@ -38,23 +44,40 @@
         </template>
     </div>
 
-    <!-- Detail & Cancellation Modal -->
     <template if:true={isModalOpen}>
         <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
             <div class="slds-modal__container fancy-modal">
                 <header class="slds-modal__header">
                     <button class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={closeModal}><lightning-icon icon-name="utility:close" size="medium"></lightning-icon></button>
-                    <h2 class="slds-text-heading_medium">Registration Details</h2>
+                    <h2 class="slds-text-heading_medium">{selectedEvent.eventName}</h2>
                 </header>
                 
                 <div class="slds-modal__content slds-p-around_large">
-                    <h3 class="slds-text-heading_small slds-m-bottom_medium">{selectedEvent.eventName}</h3>
-                    <p><strong>Status:</strong> {selectedEvent.status}</p>
-                    <p><strong>Seats Reserved:</strong> {selectedEvent.seats}</p>
-                    <hr/>
-                    <p><strong>Starts:</strong> <lightning-formatted-date-time value={selectedEvent.eventStartDate} weekday="long" year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
-                    <p><strong>Ends:</strong> <lightning-formatted-date-time value={selectedEvent.eventEndDate} weekday="long" year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
-                    <p><strong>Region:</strong> {selectedEvent.region}</p>
+                    <div class="detail-item">
+                        <lightning-icon icon-name="utility:check" size="small" class="detail-icon"></lightning-icon>
+                        <p><strong>Status:</strong> &nbsp;{selectedEvent.status}</p>
+                    </div>
+                    <div class="detail-item">
+                        <lightning-icon icon-name="utility:groups" size="small" class="detail-icon"></lightning-icon>
+                        <p><strong>Seats Reserved:</strong> &nbsp;{selectedEvent.seats}</p>
+                    </div>
+                    <hr class="slds-m-vertical_medium"/>
+                    <div class="detail-item">
+                        <lightning-icon icon-name="utility:calendar" size="small" class="detail-icon"></lightning-icon>
+                        <p><strong>Starts:</strong> &nbsp;<lightning-formatted-date-time value={selectedEvent.eventStartDate} weekday="long" year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
+                    </div>
+                    <div class="detail-item">
+                        <lightning-icon icon-name="utility:clock" size="small" class="detail-icon"></lightning-icon>
+                        <p><strong>Ends:</strong> &nbsp;<lightning-formatted-date-time value={selectedEvent.eventEndDate} weekday="long" year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
+                    </div>
+                    <div class="detail-item">
+                        <lightning-icon icon-name="utility:location" size="small" class="detail-icon"></lightning-icon>
+                        <p><strong>Venue:</strong> &nbsp;{selectedEvent.venueName}, {selectedEvent.region}</p>
+                    </div>
+                    <div class="detail-item">
+                        <lightning-icon icon-name="utility:avatar" size="small" class="detail-icon"></lightning-icon>
+                        <p><strong>Speaker:</strong> &nbsp;{selectedEvent.speakerName}</p>
+                    </div>
                 </div>
                 <footer class="slds-modal__footer">
                     <button class="close-button" onclick={closeModal}>Close</button>

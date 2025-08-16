@@ -1,5 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import createContactAndUser from '@salesforce/apex/OtpController.createContactAndUser';
+import createContactAndUser from '@salesforce/apex/SignUpcontroller.createContactAndUser';
 import webinarBG from '@salesforce/resourceUrl/webinar';
 
 export default class RoleSelection extends LightningElement {

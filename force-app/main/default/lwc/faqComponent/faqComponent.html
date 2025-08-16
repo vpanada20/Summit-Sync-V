@@ -1,0 +1,23 @@
+<template>
+    <div class="faq-container">
+        <h1 class="faq-title">Frequently Asked Questions</h1>
+
+        <template for:each={faqs} for:item="faq">
+            <div key={faq.id} class="faq-item">
+                <div class="faq-question" onclick={toggleAnswer} data-id={faq.id}>
+                    <lightning-icon icon-name={faq.iconName} 
+                                    alternative-text="Expand" 
+                                    size="x-small" 
+                                    class="faq-icon">
+                    </lightning-icon>
+                    <span>{faq.question}</span>
+                </div>
+                <template if:true={faq.isOpen}>
+                    <div class="faq-answer">
+                        {faq.answer}
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

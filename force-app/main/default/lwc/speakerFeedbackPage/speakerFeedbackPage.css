@@ -1,0 +1,19 @@
+.page-container {
+    background-color: #f3f4f6;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.title {
+    font-weight: 300;
+    color: #333;
+}
+.spinner-container {
+    height: 200px;
+}
+/* Style the accordion to look cleaner */
+.slds-accordion__section {
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}

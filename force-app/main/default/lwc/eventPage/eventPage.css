@@ -57,9 +57,16 @@
 }
 .event-location {
     color: #4b5563;
-    margin-bottom: 1rem;
-    flex-grow: 1;
+    margin-bottom: 0.5rem; /* CHANGED: Reduced margin */
+    /* flex-grow: 1; <--- REMOVED this line */
 }
+
+/* ADDED: Style for the speaker section */
+.event-speaker {
+    color: #4b5563;
+    margin-bottom: 1rem;
+}
+
 .view-more-button {
     width: 100%;
     background-color: #f3f4f6;
@@ -70,6 +77,7 @@
     color: #1f2937;
     cursor: pointer;
     transition: background-color 0.2s;
+    margin-top: auto; /* ADDED: This pushes the button to the bottom */
 }
 .view-more-button:hover {
     background-color: #e5e7eb;

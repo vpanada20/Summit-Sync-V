@@ -1,0 +1,48 @@
+<template>
+    <div class="slds-p-around_large page-container">
+        <h1 class="slds-text-heading_large slds-text-align_center slds-m-bottom_large title">Feedback for Your Events</h1>
+
+        <template if:true={isLoading}>
+            <div class="spinner-container"><lightning-spinner size="medium"></lightning-spinner></div>
+        </template>
+        
+        <template if:false={isLoading}>
+            <template if:true={eventsWithFeedback}>
+                <!-- Accordion to display each event -->
+                <lightning-accordion allow-multiple-sections-open>
+                    <template for:each={eventsWithFeedback} for:item="event">
+                        <lightning-accordion-section key={event.eventName} name={event.eventName} label={event.eventName}>
+                            <p class="slds-p-horizontal_small slds-p-bottom_small slds-text-color_weak">
+                                Event ended on <lightning-formatted-date-time value={event.eventEndDate}></lightning-formatted-date-time>
+                            </p>
+                            <!-- Table of feedback for this event -->
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th style="width: 150px;" scope="col"><div class="slds-truncate" title="Rating">Rating</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Comments">Comments</div></th>
+                                        <th style="width: 200px;" scope="col"><div class="slds-truncate" title="Submitted By">Submitted By</div></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={event.feedbacks} for:item="fb">
+                                        <tr key={fb.Id} class="slds-hint-parent">
+                                            <td><div class="slds-truncate">{fb.Rating__c}</div></td>
+                                            <td><div class="slds-truncate">{fb.Comments__c}</div></td>
+                                            <td><div class="slds-truncate">{fb.Submitted_by__r.Name}</div></td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </lightning-accordion-section>
+                    </template>
+                </lightning-accordion>
+            </template>
+            <template if:false={eventsWithFeedback}>
+                <div class="slds-box slds-text-align_center slds-p-around_large">
+                    <p>No feedback is available for your past events at this time.</p>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

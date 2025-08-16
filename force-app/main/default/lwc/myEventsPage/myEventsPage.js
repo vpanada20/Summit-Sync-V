@@ -36,6 +36,7 @@ export default class MyEventsPage extends LightningElement {
         this.wiredEventsResult = result; // Store the provisioned result
         this.isLoading = false;
         if (result.data) {
+            // Assuming data is an array of objects, each with a speakerName property
             this.registeredEvents = result.data.length > 0 ? result.data : null;
             this.error = undefined;
         } else if (result.error) {

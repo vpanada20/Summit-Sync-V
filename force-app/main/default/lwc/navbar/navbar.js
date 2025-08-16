@@ -1,5 +1,5 @@
 import { LightningElement, track, wire } from 'lwc';
-// NavigationMixin is no longer needed for the search functionality
+// NavigationMixin is still used for other links, but not for the search
 import { NavigationMixin } from 'lightning/navigation';
 import isGuest from '@salesforce/user/isGuest';
 import userId from '@salesforce/user/Id';
