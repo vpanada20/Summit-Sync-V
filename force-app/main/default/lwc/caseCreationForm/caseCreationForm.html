@@ -1,0 +1,54 @@
+<template>
+    <div class="case-form-container slds-p-around_large">
+        <div class="slds-box form-box">
+            <!-- Show the form -->
+            <template if:false={isSuccess}>
+                <h2 class="slds-text-heading_large slds-text-align_center slds-m-bottom_x-small">Submit a Query</h2>
+                <p class="slds-text-body_regular slds-text-align_center slds-m-bottom_large slds-text-color_weak">Our team will get back to you shortly.</p>
+
+                <!-- Subject Input -->
+                <lightning-input
+                    label="Subject"
+                    value={subject}
+                    onchange={handleSubjectChange}
+                    required
+                    placeholder="e.g., Question about booking"
+                    class="slds-m-bottom_medium">
+                </lightning-input>
+
+                <!-- Description Text Area -->
+                <lightning-textarea
+                    label="Description"
+                    value={description}
+                    onchange={handleDescriptionChange}
+                    required
+                    placeholder="Please provide as much detail as possible...">
+                </lightning-textarea>
+
+                <!-- Error Display -->
+                <template if:true={error}>
+                    <div class="slds-text-color_error slds-m-top_medium">{error}</div>
+                </template>
+
+                <!-- Submit Button -->
+                <lightning-button
+                    variant="brand"
+                    label="Submit Case"
+                    onclick={handleSubmit}
+                    disabled={isLoading}
+                    class="slds-m-top_large slds-size_1-of-1 submit-button">
+                </lightning-button>
+            </template>
+
+            <!-- Show success message -->
+            <template if:true={isSuccess}>
+                <div class="slds-text-align_center slds-p-vertical_xx-large">
+                    <lightning-icon icon-name="action:approval" size="large" variant="success"></lightning-icon>
+                    <h2 class="slds-text-heading_medium slds-m-top_medium">Query Submitted!</h2>
+                    <p class="slds-m-top_small">Thank you for reaching out. A support case has been created, and our team will be in touch soon.</p>
+                    <lightning-button label="Submit Another Query" onclick={resetForm} class="slds-m-top_large"></lightning-button>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

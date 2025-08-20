@@ -1,0 +1,20 @@
+.case-form-container {
+    background-color: #f3f4f6;
+    min-height: calc(100vh - 80px); /* Fill screen below header */
+    display: flex;
+    align-items: flex-start; /* Aligns form to the top */
+    justify-content: center;
+    padding-top: 3rem;
+}
+.form-box {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.submit-button {
+    --sds-c-button-brand-color-background: #E55D4A;
+    --sds-c-button-brand-color-border: #E55D4A;
+    --sds-c-button-brand-color-background-hover: #d1410c;
+    --sds-c-button-brand-color-border-hover: #d1410c;
+}
